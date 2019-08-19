@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "avcodec.h": "c",
+        "sdl_thread.h": "c",
+        "sdl.h": "c"
+    }
+}
