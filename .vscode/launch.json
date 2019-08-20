@@ -8,7 +8,7 @@
             "name": "t1",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/tutorial01.out",
+            "program": "${workspaceFolder}/bin/tutorial03.out",
             "args": [
                 "./test.mp4"
             ],

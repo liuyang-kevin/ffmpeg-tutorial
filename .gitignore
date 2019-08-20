@@ -11,5 +11,8 @@
 *.la
 *.a
 
+#
+bin/*
 # 
 *.ppm
+.DS_Store

@@ -135,8 +135,7 @@ int main(int argc, char *argv[]) {
   // of AVPicture
   // 我们使用 avpicture_fill 来关联新分配的缓冲区的帧。 
   // AVPicture 结构体是 AVFrame 结构体的一个子集，开始的AVFrame 是和 AVPicture 相同的
-  avpicture_fill((AVPicture *)pFrameRGB, buffer, AV_PIX_FMT_RGB24,
-		 pCodecCtx->width, pCodecCtx->height);
+  avpicture_fill((AVPicture *)pFrameRGB, buffer, AV_PIX_FMT_RGB24, pCodecCtx->width, pCodecCtx->height);
 
   // 通过包来读取整个视频流， 然后解码到帧当中，一但一帧完成了， 将转换并保存它
   i=0;

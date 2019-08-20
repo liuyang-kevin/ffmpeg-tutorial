@@ -143,8 +143,11 @@ int main(int argc, char *argv[]) {
         NULL,
         NULL
     );
+    
+    // printf("&packet -> %d", 111);
 
   while(av_read_frame(pFormatCtx, &packet)>=0) {
+    // printf("&packet -> %d \n", &packet);
     // Is this a packet from the video stream?
     if(packet.stream_index==videoStream) {
       // Decode video frame
@@ -200,6 +203,9 @@ int main(int argc, char *argv[]) {
     // 序的时候特别有用，我们将会在教程 4 里面领略。
     SDL_PollEvent(&event);
     switch(event.type) {
+      case SDL_MOUSEBUTTONDOWN:
+          printf("SDL_MOUSEBUTTONDOWN -> %d \n", SDL_MOUSEBUTTONDOWN);
+      break;
     case SDL_QUIT:
       SDL_Quit();
       exit(0);

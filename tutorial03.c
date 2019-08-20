@@ -288,7 +288,7 @@ int main(int argc, char *argv[]) {
   wanted_spec.freq = aCodecCtx->sample_rate;  // 采样率
   wanted_spec.format =   AUDIO_S16SYS;        // 数据格式：“S16SYS”中的“ S”是有符号的意思， 16 的意思是每个样本是 16位，“ SYS”表示字节顺序按照当前系统的顺序。
   wanted_spec.channels = aCodecCtx->channels; // 通道数
-  wanted_spec.silence = 0;                    // 这是用来表示静音的值。 因为声音是有符号的，所以静音的值通常为 0。
+  wanted_spec.silence =  0;                    // 这是用来表示静音的值。 因为声音是有符号的，所以静音的值通常为 0。
   wanted_spec.samples = SDL_AUDIO_BUFFER_SIZE;// 音频缓存，它让我们设置当 SDL 请求更多音频数据时我们应该给它多大的数据
   wanted_spec.callback = audio_callback;      // 当音频设备需要更多数据时调用的回调函数
   wanted_spec.userdata = aCodecCtx;           // SDL 会回调一个回调函数运行的参数。我们将让回调函数得到整个编解码的上下文
@@ -359,7 +359,7 @@ int main(int argc, char *argv[]) {
         pCodecCtx->pix_fmt,
         pCodecCtx->width,
         pCodecCtx->height,
-        PIX_FMT_YUV420P,
+        AV_PIX_FMT_YUV420P,
         SWS_BILINEAR,
         NULL,
         NULL,

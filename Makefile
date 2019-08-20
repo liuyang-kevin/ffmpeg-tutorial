@@ -31,9 +31,10 @@ LIBS:= -framework VideoToolbox \
 	   -framework AudioUnit \
 	   -framework Carbon -v
 
-EXE:=tutorial01.out \
+# EXE:=tutorial01.out \
     # tutorial02.out tutorial03.out tutorial04.out\
 	# tutorial05.out tutorial06.out tutorial07.out tutorial08.out
+EXE:=tutorial03.out
 
 # 		 -std=c++11 -stdlib=libc++
 #  -lstdc++

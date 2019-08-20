@@ -3,5 +3,6 @@
         "avcodec.h": "c",
         "sdl_thread.h": "c",
         "sdl.h": "c"
-    }
+    },
+    "files.autoSave": "onFocusChange"
 }
