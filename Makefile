@@ -35,7 +35,8 @@ LIBS:= -framework VideoToolbox \
 
 EXE:=sdl2_00_only_window.out \
      sdl2_01_player.out \
-	 sdl2_02_audio_player.out
+	 sdl2_02_audio_player.out \
+	 sdl2_03_waveform.out
 
 	# sdl_app.out	\
     # tutorial01.out tutorial02.out tutorial03.out \

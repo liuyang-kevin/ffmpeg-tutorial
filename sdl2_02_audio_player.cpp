@@ -7,6 +7,9 @@
  * av codec parameter
  * av codec
  * 开启while循环 提取 packet 保存到queue
+ * 
+ * CLI
+ * clear && make && ./bin/sdl2_02_audio_player.out ./test.mp4
  */
 extern "C"{
     #include "libavcodec/avcodec.h"
@@ -322,6 +325,8 @@ void audio_callback(void *userdata, Uint8 *stream, int len){
 */
 int video_thread_proc(void *data)
 {
+    printf("video_thread_proc  %lu\n", frameq.size());
+
     video_thread_params *params = (video_thread_params *)data;
     AVFrame *pFrame = NULL;
     AVFrame *pNextFrame = NULL;
@@ -336,6 +341,7 @@ int video_thread_proc(void *data)
     {
         while (!frameq.empty())
         {
+            printf("frameq.size %lu\n", frameq.size());
             if (pFrame == NULL)
             {
                 SDL_LockMutex(params->video_mutex);
@@ -670,6 +676,8 @@ int main(int argc, char *argv[]){
             //decode video frame of size packet.size from packet.data into picture
             ret = avcodec_decode_video2(pCodecCtx, pFrame, &frameFinished, &packet);
             if(ret>=0) { //解码出内容
+                printf("-解码出内容--------%d\n", ret);
+                printf("-frameFinished--------%d\n", frameFinished);
                 //Convert the image from its native format to YUV
                 if (frameFinished){ 
                     // 用互斥体保持同步，将包送入队列，让另外的线程自己处理
@@ -677,7 +685,7 @@ int main(int argc, char *argv[]){
                     packet_queue_put(&videoq, &packet);
                     AVFrame *pNewFrame = av_frame_clone(pFrame);
                     frameq.push(pNewFrame);
-                    //cout << "Pushing vpacket." << endl;
+                    printf("-Pushing vpacket.--------%d\n", frameFinished);
                     SDL_UnlockMutex(vtp.video_mutex);
                 }
                 // 注意这里也必须要 free packet，否则会导致严重内存泄露

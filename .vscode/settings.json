@@ -64,7 +64,9 @@
         "vector": "cpp",
         "queue": "cpp",
         "queue.h": "c",
-        "deque": "c"
+        "deque": "c",
+        "fstream": "cpp",
+        "internal.h": "c"
     },
     "files.autoSave": "onFocusChange"
 }
