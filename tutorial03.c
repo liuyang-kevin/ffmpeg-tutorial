@@ -370,49 +370,50 @@ int main(int argc, char *argv[]) {
   // Read frames and save first five frames to disk
   i=0;
   while(av_read_frame(pFormatCtx, &packet)>=0) {
+    printf("--av_read_frame-- \n");
     // Is this a packet from the video stream?
     // 如果是视频数据，那么就解码并显示
     if(packet.stream_index==videoStream) {
-      // Decode video frame
-      avcodec_decode_video2(pCodecCtx, pFrame, &frameFinished,&packet);
+      // // Decode video frame
+      // avcodec_decode_video2(pCodecCtx, pFrame, &frameFinished,&packet);
       
-      // Did we get a video frame?
-      if(frameFinished) {
-        // 要把图层锁住，因为我们要往上面写东西，这是一个避免以后发现问题的好习惯。
-	      SDL_LockYUVOverlay(bmp);
-        // AVPicture结构体有一个数据指针指向一个有四个元素的数据指针，
-        // 因为我们处理的 YUV420P 只有三通道，所以只要设置三组数据。
-	      AVPicture pict;
-	      pict.data[0] = bmp->pixels[0];
-	      pict.data[1] = bmp->pixels[2];
-	      pict.data[2] = bmp->pixels[1];
+      // // Did we get a video frame?
+      // if(frameFinished) {
+      //   // 要把图层锁住，因为我们要往上面写东西，这是一个避免以后发现问题的好习惯。
+	    //   SDL_LockYUVOverlay(bmp);
+      //   // AVPicture结构体有一个数据指针指向一个有四个元素的数据指针，
+      //   // 因为我们处理的 YUV420P 只有三通道，所以只要设置三组数据。
+	    //   AVPicture pict;
+	    //   pict.data[0] = bmp->pixels[0];
+	    //   pict.data[1] = bmp->pixels[2];
+	    //   pict.data[2] = bmp->pixels[1];
 
-	      pict.linesize[0] = bmp->pitches[0];
-	      pict.linesize[1] = bmp->pitches[2];
-	      pict.linesize[2] = bmp->pitches[1];
+	    //   pict.linesize[0] = bmp->pitches[0];
+	    //   pict.linesize[1] = bmp->pitches[2];
+	    //   pict.linesize[2] = bmp->pitches[1];
 
-	      // Convert the image into YUV format that SDL uses
-        //　将图片转换成YUV格式
-        sws_scale
-        (
-          sws_ctx, 
-          (uint8_t const * const *)pFrame->data, 
-          pFrame->linesize, 
-          0,
-          pCodecCtx->height,
-          pict.data,
-          pict.linesize
-        );
+	    //   // Convert the image into YUV format that SDL uses
+      //   //　将图片转换成YUV格式
+      //   sws_scale
+      //   (
+      //     sws_ctx, 
+      //     (uint8_t const * const *)pFrame->data, 
+      //     pFrame->linesize, 
+      //     0,
+      //     pCodecCtx->height,
+      //     pict.data,
+      //     pict.linesize
+      //   );
 	
-	      SDL_UnlockYUVOverlay(bmp);
-        // 我们仍然需要告诉 SDL 显示已经放进去的数据， 要传入一个表明电影位置、 宽度、 高度、 缩放比例的矩形参数
-	      rect.x = 0;
-	      rect.y = 0;
-	      rect.w = pCodecCtx->width;
-	      rect.h = pCodecCtx->height;
-	      SDL_DisplayYUVOverlay(bmp, &rect);
-	      av_free_packet(&packet);
-      }
+	    //   SDL_UnlockYUVOverlay(bmp);
+      //   // 我们仍然需要告诉 SDL 显示已经放进去的数据， 要传入一个表明电影位置、 宽度、 高度、 缩放比例的矩形参数
+	    //   rect.x = 0;
+	    //   rect.y = 0;
+	    //   rect.w = pCodecCtx->width;
+	    //   rect.h = pCodecCtx->height;
+	    //   SDL_DisplayYUVOverlay(bmp, &rect);
+	    //   av_free_packet(&packet);
+      // }
     } else if(packet.stream_index==audioStream) {
       // 如果是音频就放置到音频队列
       packet_queue_put(&audioq, &packet);

@@ -33,18 +33,7 @@ LIBS:= -framework VideoToolbox \
 	   -framework AudioUnit \
 	   -framework Carbon -v
 
-EXE:=sdl2_00_only_window.out \
-     sdl2_01_player.out \
-	 sdl2_02_audio_player.out
-
-	# sdl_app.out	\
-    # tutorial01.out tutorial02.out tutorial03.out \
-
-    # tutorial04.out\
-	# tutorial05.out tutorial06.out tutorial07.out tutorial08.out
-# EXE:=sdl_app.out
-# 		 -std=c++11 -stdlib=libc++
-#  -lstdc++
+EXE:=hello_world.out \
 
 #
 # This is here to prevent Make from deleting secondary files.

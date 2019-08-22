@@ -13,6 +13,7 @@
 
 #
 bin/*
+SDL2/bin/*
 # 
 *.ppm
 .DS_Store

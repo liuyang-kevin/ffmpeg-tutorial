@@ -5,7 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "/Users/fd/Projects/ffmpeg",
-                "/usr/local/Cellar/sdl/1.2.15_1/include/SDL"
+                "/usr/local/include/SDL2"
             ],
             "defines": [],
             "macFrameworkPath": [

@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "t1",
+            "name": "sdl_app",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/tutorial03.out",
+            "program": "${workspaceFolder}/bin/sdl_app.out",
             "args": [
                 "./test.mp4"
             ],
@@ -18,6 +18,50 @@
             "externalConsole": false,
             "MIMode": "lldb",
             "preLaunchTask": "build" // 调试会话开始前执行的任务，一般为编译程序。与tasks.json的taskName相对应，可根据需求选择是否使用
-        }
+        },
+        {
+            "name": "sdl2_00_only_window",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/sdl2_00_only_window.out",
+            "args": [
+                "./test.mp4"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "build" // 调试会话开始前执行的任务，一般为编译程序。与tasks.json的taskName相对应，可根据需求选择是否使用
+        },
+        {
+            "name": "sdl2_01_player",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/sdl2_01_player.out",
+            "args": [
+                "./test.mp4"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "build" // 调试会话开始前执行的任务，一般为编译程序。与tasks.json的taskName相对应，可根据需求选择是否使用
+        },{
+            "name": "sdl2_02",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/sdl2_02_audio_player.out",
+            "args": [
+                "./test.mp4"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "build" // 调试会话开始前执行的任务，一般为编译程序。与tasks.json的taskName相对应，可根据需求选择是否使用
+        },
     ]
 }
