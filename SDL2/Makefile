@@ -34,6 +34,7 @@ LIBS:= -framework VideoToolbox \
 	   -framework Carbon -v
 
 EXE:=hello_world.out \
+	 x01_hello_world.out \
 
 #
 # This is here to prevent Make from deleting secondary files.

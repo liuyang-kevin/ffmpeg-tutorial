@@ -27,6 +27,8 @@ using namespace std;
 
 #define AVCODEC_MAX_AUDIO_FRAME_SIZE 192000
 #define FF_INPUT_BUFFER_PADDING_SIZE 8
+#define MAX_AUDIO_FRAME_SIZE 192000
+
 
 int main(int argc, char *argv[])
 {
@@ -64,12 +66,16 @@ int main(int argc, char *argv[])
         printf("Could not find Audio Stream \n");
         return -1;
     }
+    
 
     // AVDictionary *metadata = pFormatCtx->metadata;
     AVCodecParameters *pCodecParam = pFormatCtx->streams[audioIndex]->codecpar;
     AVCodec *codec = avcodec_find_decoder(pCodecParam->codec_id);
     AVCodecContext *ctx = avcodec_alloc_context3(codec); //需要使用avcodec_free_context释放
-    avcodec_parameters_to_context(ctx, pCodecParam);
+    int rescode = avcodec_parameters_to_context(ctx, pCodecParam);
+    if (rescode < 0){
+        printf("上下文生成错误 avcodec_parameters_to_context(ctx, pCodecParam)\n");
+    }
 
     if (codec == NULL)
     {
@@ -83,15 +89,6 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    // AVPacket packet;
-    // av_init_packet(&packet);
-    // AVFrame *frame = av_frame_alloc();
-
-    // int buffer_size = 4096;
-    // uint8_t *buffer = new uint8_t[buffer_size];
-    // packet.data=buffer;
-    // packet.size =buffer_size;
-
     AVPacket *packet;
     AVFrame *frame;
     packet = av_packet_alloc();  //初始化一个packet
@@ -102,21 +99,65 @@ int main(int argc, char *argv[])
     fileCh1.open("ch1.csv");
     fileCh2.open("ch2.csv");
 
+
+    // // int out_sample_rate = 44100;   //输出的采样率
+    // int out_sample_rate = 48000;   //输出的采样率
+    // enum AVSampleFormat out_sample_fmt = AV_SAMPLE_FMT_S16; //输出的声音格式
+    // uint64_t out_chn_layout = AV_CH_LAYOUT_STEREO;  //输出的通道布局 双声道
+    // int out_nb_samples = -1;        //输出的音频采样
+    // int out_channels = -1;        //输出的通道数
+    // int out_buffer_size = -1;   //输出buff大小
+    // unsigned char *outBuff = NULL;//输出的Buffer数据
+    // uint64_t in_chn_layout = -1;  //输入的通道布局
+    // //单个通道中的采样数
+    // out_nb_samples = ctx->frame_size;
+    // //输出的声道数
+    // out_channels = av_get_channel_layout_nb_channels(out_chn_layout);
+    // //输出音频的布局
+    // in_chn_layout = av_get_default_channel_layout(ctx->channels);
+
+
+    // /** 计算重采样后的实际数据大小,并分配空间 **/
+    // //计算输出的buffer的大小
+    // out_buffer_size = av_samples_get_buffer_size(NULL, out_channels, out_nb_samples, out_sample_fmt, 1);
+    // //分配输出buffer的空间
+    // outBuff = (unsigned char *) av_malloc(MAX_AUDIO_FRAME_SIZE * 2); //双声道
+
     AVSampleFormat sfmt = ctx->sample_fmt;
 
     while (av_read_frame(pFormatCtx, packet) >= 0)
     {
+        // printf("%llu \n", packet->buf);
+
         if (packet->stream_index == audioIndex)
         {
+            // printf("packet->stream_index %llu \n", packet->stream_index);
             int ret = avcodec_send_packet(ctx, packet);
+            printf("ret %d \n", ret);
             if (ret < 0)
             {
                 fprintf(stderr, "Error submitting the packet to the decoder\n");
                 exit(1);
             }
+
             while(avcodec_receive_frame(ctx, frame) == 0)
             {
-                printf("%s \n", frame->channel_layout);
+                // printf("%d \n", frame->linesize[0]);
+                // printf("%d \n", frame->nb_samples);
+                // printf("%d \n", frame->channels);
+                // printf("%d \n", frame->channel_layout);
+                
+                // printf("%d \n", frame->);
+                // for (int ch = 0; ch < frame->channels; ch++)
+                // {
+                //     if (ch == 0)
+                //         fileCh1 << ((int16_t *)frame->extended_data[ch]) << "\n";
+                //     else if (ch == 1)
+                //         fileCh2 << ((int16_t *)frame->extended_data[ch]) << "\n";
+                // }
+
+
+
                             //         for (int nb = 0; nb < plane_size / sizeof(uint16_t); nb++)
             //         {
             //             for (int ch = 0; ch < ctx->channels; ch++)
@@ -128,6 +169,9 @@ int main(int argc, char *argv[])
             //             }
             //         }
             }
+
+            
+            
 
 
             // int data_size = av_samples_get_buffer_size(&plane_size, ctx->channels,

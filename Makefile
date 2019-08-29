@@ -12,6 +12,10 @@ LDFLAGS:=$(shell pkg-config --libs sdl2 sdl2_image) \
 		 -L/Users/fd/Projects/ffmpeg/libswresample \
 		 -L/Users/fd/Projects/ffmpeg/libswscale \
 		 -L/Users/fd/Projects/ffmpeg/libavutil \
+		 -L/Users/fd/Projects/ffmpeg/libavfilter \
+		 -L/Users/fd/Projects/ffmpeg/libpostproc \
+		 -lpostproc \
+		 -lavfilter \
 		 -lavformat \
 		 -lavcodec \
 		 -lswresample \
@@ -31,12 +35,28 @@ LIBS:= -framework VideoToolbox \
 	   -framework Security \
 	   -framework CoreMedia \
 	   -framework AudioUnit \
+	   -framework OpenGL \
+	   -framework AppKit \
+	   -framework QuartzCore \
+	   -framework Cocoa \
 	   -framework Carbon -v
+
+# -framework OpenGL 
+# -framework AppKit 
+# -framework Security 
+# -framework CoreFoundation 
+# -framework CoreVideo 
+# -framework CoreMedia 
+# -framework QuartzCore 
+# -framework VideoDecodeAcceleration 
+# -framework Cocoa
+
 
 EXE:=sdl2_00_only_window.out \
      sdl2_01_player.out \
 	 sdl2_02_audio_player.out \
-	 sdl2_03_waveform.out
+	 sdl2_03_waveform.out \
+	 office_filter_audio.out
 
 	# sdl_app.out	\
     # tutorial01.out tutorial02.out tutorial03.out \
