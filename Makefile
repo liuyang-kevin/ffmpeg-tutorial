@@ -56,7 +56,10 @@ EXE:=sdl2_00_only_window.out \
      sdl2_01_player.out \
 	 sdl2_02_audio_player.out \
 	 sdl2_03_waveform.out \
-	 office_filter_audio.out
+	 office_filter_audio.out \
+	 resampling_audio.out \
+	 filtering_audio.out \
+	 muxing.out
 
 	# sdl_app.out	\
     # tutorial01.out tutorial02.out tutorial03.out \

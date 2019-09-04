@@ -9,7 +9,7 @@
  * 开启while循环 提取 packet 保存到queue
  * 
  * CLI
- * clear && make && ./bin/sdl2_02_audio_player.out ./test.mp4
+ * clear && make && ./bin/sdl2_03_waveform.out ./test.mp4
  */
 
 extern "C"
