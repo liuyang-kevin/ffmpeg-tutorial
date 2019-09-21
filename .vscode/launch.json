@@ -77,12 +77,12 @@
             "MIMode": "lldb",
             "preLaunchTask": "build" // 调试会话开始前执行的任务，一般为编译程序。与tasks.json的taskName相对应，可根据需求选择是否使用
         },{
-            "name": "office_filter_audio",
+            "name": "sdl2_04_showwave",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/office_filter_audio.out",
+            "program": "${workspaceFolder}/bin/sdl2_04_showwave.out",
             "args": [
-                "./35.mp4"
+                "./test.mp4"
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

@@ -67,7 +67,8 @@
         "deque": "c",
         "fstream": "cpp",
         "internal.h": "c",
-        "buffersink.h": "c"
+        "buffersink.h": "c",
+        "buffersrc.h": "c"
     },
-    "files.autoSave": "onFocusChange"
+    "files.autoSave": "onFocusChange",
 }

@@ -56,6 +56,7 @@ EXE:=sdl2_00_only_window.out \
      sdl2_01_player.out \
 	 sdl2_02_audio_player.out \
 	 sdl2_03_waveform.out \
+	 sdl2_04_showwave.out \
 	 office_filter_audio.out \
 	 resampling_audio.out \
 	 filtering_audio.out \
